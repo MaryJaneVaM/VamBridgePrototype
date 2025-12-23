@@ -16,10 +16,10 @@ The system consists of three major components:
 
 ```mermaid
 flowchart LR
-    V[VaM Plugin<br/>(TCP Client)] <--> S[Server<br/>(Bridge Hub)]
-    S <----> B[Browser<br/>(WebSocket Client)]
+    V["VaM Plugin\n(TCP Client)"] <--> S["Server\n(Bridge Hub)"]
+    S <--> B["Browser\n(WebSocket Client)"]
 
-    %% Labels for connections
+    %% Connection labels
     V ---|TCP| S
     S ---|WS| B
 ```
