@@ -211,17 +211,4 @@ sequenceDiagram
 
 ---
 
-# 9. Future Extensions
-
-The WS protocol is designed to support:
-
-- Authentication  
-- Version negotiation  
-- Binary frames  
-- Compression  
-- Multiple browser roles (viewer, controller, admin)  
-- Subscription-based message filtering  
-
----
-
 # End of Document
