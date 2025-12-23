@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <OutputType>Library</OutputType>
+    <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+
+    <!-- Use environment variable VAM_PATH -->
+    <VamPath>$(VAM_PATH)</VamPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(VamPath)\VaM_Data\Managed\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(VamPath)\VaM_Data\Managed\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(VamPath)\VaM_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>$(VamPath)\VaM_Data\Managed\UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="DeploySource" AfterTargets="Build">
+    <ItemGroup>
+      <FilesToDeploy Include="**\*.cs" Exclude="obj\**;bin\**" />
+      <FilesToDeploy Include="**\*.cslist" Exclude="obj\**;bin\**" />
+    </ItemGroup>
+
+    <Copy 
+      SourceFiles="@(FilesToDeploy)"
+      DestinationFiles="@(FilesToDeploy -> '$(VamPath)\Custom\Scripts\MaryJane\VaMBridgePrototype\VaMBridgePerson\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
+
+</Project>
