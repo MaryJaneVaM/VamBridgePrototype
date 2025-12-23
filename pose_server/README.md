@@ -51,15 +51,19 @@ https://developers.google.com/mediapipe/solutions/models
 
 Python 3.10+ is supported and tested with:
 
+```
 mediapipe==0.10.21
+```
 
 Core dependencies:
 
-flask  
-flask-cors  
-mediapipe==0.10.21  
-opencv-python  
-numpy  
+```
+flask
+flask-cors
+mediapipe==0.10.21
+opencv-python
+numpy
+```
 
 ---
 
@@ -79,7 +83,9 @@ Hand Landmarker (Tasks API):
 
 Place all downloaded models inside:
 
+```
 pose_server/models/
+```
 
 ---
 
@@ -89,20 +95,28 @@ pose_server/models/
 
 Windows (PowerShell):
 
-py -3.10 -m venv venv  
-venv\Scripts\Activate.ps1  
+```
+py -3.10 -m venv venv
+venv\Scripts\Activate.ps1
+```
 
 ### 2. Upgrade pip
 
+```
 python -m pip install --upgrade pip
+```
 
 ### 3. Install dependencies
 
+```
 pip install -r requirements.txt
+```
 
 ### 4. (Optional) Freeze exact versions
 
+```
 pip freeze > requirements.txt
+```
 
 ---
 
@@ -110,13 +124,17 @@ pip freeze > requirements.txt
 
 Start the server:
 
+```
 python app.py
+```
 
 Endpoints:
 
-http://localhost:5005/detect/holistic  
-http://localhost:5005/detect/pose  
-http://localhost:5005/detect/hands  
+```
+http://localhost:5005/detect/holistic
+http://localhost:5005/detect/pose
+http://localhost:5005/detect/hands
+```
 
 ---
 
@@ -143,15 +161,18 @@ Crop‑based refinement is automatic whenever possible.
 
 All endpoints return the same top‑level structure:
 
+```
 {
   "meta": { ... },
   "pose": { ... } | null,
   "hand_left": { ... } | null,
   "hand_right": { ... } | null
 }
+```
 
 ### `meta` block
 
+```
 {
   "source": "pose",
   "model": "pose_landmarker_heavy.task",
@@ -163,9 +184,11 @@ All endpoints return the same top‑level structure:
   "resize_scale": 0.5,
   "frame_valid": true
 }
+```
 
 ### Pose block (`pose`)
 
+```
 {
   "landmarks": [
     {
@@ -184,9 +207,11 @@ All endpoints return the same top‑level structure:
   "bbox": { ... },
   "crop": { ... }
 }
+```
 
 ### Hand block (`hand_left`, `hand_right`)
 
+```
 {
   "handedness": "Left",
   "handedness_confidence": 0.92,
@@ -205,107 +230,122 @@ All endpoints return the same top‑level structure:
   "completeness": 1.0,
   "crop": { ... }
 }
+```
 
 ---
 
 ## Example requests and responses
 
 ### 1. Holistic endpoint  
-POST http://localhost:5005/detect/holistic
+POST `http://localhost:5005/detect/holistic`
 
 JavaScript example:
 
+```
 fetch("http://localhost:5005/detect/holistic", {
     method: "POST",
     body: resizedImageBlob
 })
 .then(r => r.json())
 .then(data => console.log("Holistic result:", data));
+```
 
 Example response (simplified):
 
+```
 {
   "meta": { ... },
   "pose": { ... },
   "hand_left": { ... },
   "hand_right": { ... }
 }
+```
 
 ---
 
 ### 2. Pose Tasks API endpoint  
-POST http://localhost:5005/detect/pose
+POST `http://localhost:5005/detect/pose`
 
 JavaScript example:
 
+```
 fetch("http://localhost:5005/detect/pose", {
     method: "POST",
     body: resizedImageBlob
 })
 .then(r => r.json())
 .then(data => console.log("Pose Tasks result:", data));
+```
 
 Example response (simplified):
 
+```
 {
   "meta": { ... },
   "pose": { ... },
   "hand_left": null,
   "hand_right": null
 }
+```
 
 ---
 
 ### 3. Hand Tasks API endpoint  
-POST http://localhost:5005/detect/hands
+POST `http://localhost:5005/detect/hands`
 
 JavaScript example:
 
+```
 fetch("http://localhost:5005/detect/hands", {
     method: "POST",
     body: resizedImageBlob
 })
 .then(r => r.json())
 .then(data => console.log("Hand Tasks result:", data));
+```
 
 Example response (simplified):
 
+```
 {
   "meta": { ... },
   "pose": null,
   "hand_left": { ... },
   "hand_right": { ... }
 }
+```
 
 ---
 
 ## Project structure
 
-pose_server/  
-  app.py  
-  routes/  
-    holistic_route.py  
-    pose_route.py  
-    hand_route.py  
-  workers/  
-    holistic_worker.py  
-    pose_worker.py  
-    hand_worker.py  
-  utils/  
-    base_worker.py  
-    bbox_utils.py  
-    crop_utils.py  
-    image_utils.py  
-    landmark_utils.py  
-    model_utils.py  
-    schema_utils.py  
-  models/  
-    pose_landmarker_heavy.task  
-    pose_landmarker_full.task  
-    hand_landmarker.task  
-  requirements.txt  
-  LICENSE  
-  NOTICE  
+```
+pose_server/
+  app.py
+  routes/
+    holistic_route.py
+    pose_route.py
+    hand_route.py
+  workers/
+    holistic_worker.py
+    pose_worker.py
+    hand_worker.py
+  utils/
+    base_worker.py
+    bbox_utils.py
+    crop_utils.py
+    image_utils.py
+    landmark_utils.py
+    model_utils.py
+    schema_utils.py
+  models/
+    pose_landmarker_heavy.task
+    pose_landmarker_full.task
+    hand_landmarker.task
+  requirements.txt
+  LICENSE
+  NOTICE
+```
 
 ---
 
