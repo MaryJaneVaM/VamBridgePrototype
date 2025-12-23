@@ -1,0 +1,24 @@
+VaMBridgeCamera and VaMBridgePerson (Virt-a-Mate Bridge Plugins)
+Copyright (c) 2025 MaryJaneVaM
+
+These projects include original code authored by MaryJane and are licensed under
+the Creative Commons Attribution‑NonCommercial‑ShareAlike 4.0 International License
+(CC BY‑NC‑SA 4.0).
+
+Both plugins provide lightweight TCP communication utilities and JSON-based
+protocol handling for external control of Virt‑a‑Mate WindowCamera and Person
+atoms.
+
+Third‑party components used in these projects include:
+
+- UnityEngine (Unity 2018 runtime components)
+- Virt‑a‑Mate core assemblies (Assembly‑CSharp, plugin interfaces)
+- SimpleJSON (lightweight JSON parsing library)
+- .NET / Mono standard library components (System, System.Net.Sockets, etc.)
+
+These components are licensed under their respective open‑source or proprietary
+licenses. No modifications have been made to these third‑party libraries, and
+their licenses and copyright notices remain the property of their
+respective authors.
+
+This NOTICE file is provided for attribution and licensing transparency.
