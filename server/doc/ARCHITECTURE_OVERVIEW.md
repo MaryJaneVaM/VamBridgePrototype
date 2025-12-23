@@ -189,17 +189,18 @@ if message from browser:
 
 # 8. Full Architecture Diagram (ASCII)
 
-```
-   +-------------------+         +-------------------+         +-------------------+
-   |    VaM Plugin     |  TCP    |      Server       |   WS    |     Browser       |
-   | (TCP Connection)  |<------->|  (Bridge Router)  |<------->| (WebSocket Client)|
-   +-------------------+         +-------------------+         +-------------------+
-            |                           |                           |
-            |--- hello ---------------->|                           |
-            |<-- acknowledge -----------|                           |
-            |--- results -------------->|--- broadcast ------------>|
-            |                           |<-- commands --------------|
-            |<-- targeted commands -----|                           |
+```mermaid
+sequenceDiagram
+    participant V as VaM Plugin<br/>(TCP Connection)
+    participant S as Server<br/>(Bridge Router)
+    participant B as Browser<br/>(WebSocket Client)
+
+    V->>S: hello
+    S->>V: acknowledge
+    V->>S: results
+    S->>B: broadcast
+    B->>S: commands
+    S->>V: targeted commands
 ```
 
 ---
