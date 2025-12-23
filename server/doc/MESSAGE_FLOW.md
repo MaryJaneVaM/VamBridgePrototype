@@ -12,13 +12,18 @@ It summarizes the runtime behavior of the server and the routing logic between T
 
 # 1. High‑Level Architecture
 
-```
-   +-------------------+         +-------------------+         +-------------------+
-   |    VaM Plugin     |  TCP    |      Server       |   WS    |     Browser       |
-   +-------------------+ <-----> +-------------------+ <-----> +-------------------+
-            |                           |                           |
-            |   Raw TCP (framed JSON)   |   Async WS JSON messages  |
-            |                           |                           |
+```mermaid
+flowchart LR
+    V["VaM Plugin\n(TCP)"]
+    S["Server\n(Bridge)"]
+    B["Browser\n(WebSocket)"]
+
+    V <--> S
+    S <--> B
+
+    %% Connection labels
+    V ---|Raw TCP\n(framed JSON)| S
+    S ---|Async WS\n(JSON messages)| B
 ```
 
 The server acts as a **bridge**:
