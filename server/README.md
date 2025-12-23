@@ -28,16 +28,19 @@ Base64‑encoded images are forwarded directly to browsers without modification.
 
 ## Requirements
 
+```
 # Networking
 websockets==12.0
 
 # Core utilities
 # (asyncio, socket, json, etc. are built into Python)
+```
 
 ---
 
 ## Installation
 
+```
 1. Create and activate a virtual environment
    python -m venv venv
    source venv/bin/activate        # Linux/macOS
@@ -48,6 +51,7 @@ websockets==12.0
 
 3. Install dependencies
    pip install -r requirements.txt
+```
 
 ---
 
@@ -55,7 +59,9 @@ websockets==12.0
 
 Start the server:
 
+```
 python app.py
+```
 
 The server will:
 
@@ -71,23 +77,30 @@ The server will:
 The server does not decode or transform images.  
 Plugins can send base64‑encoded PNG/JPEG frames as data URIs:
 
+```
 TCP → Browser message
 {
   "cmd": "image",
   "src": "data:image/png;base64,...."
 }
+```
 
-Browser rendering
+Browser rendering:
+
+```
 <img src="data:image/png;base64,{{base64_string}}" />
+```
 
 ---
 
 ## Project Structure
 
+```
 server/
 ├── app.py            # Entrypoint: starts TCP + WebSocket hub
 ├── ws_hub.py         # WebSocket broadcast hub
 ├── ws_helpers.py     # WebSocket utility helpers
 ├── tcp_helpers.py    # TCP receive/send helpers for VaM plugins
 ├── core.py           # Shared routing + message handling logic
-├── requirements.txt  # Dependencies
+└── requirements.txt  # Dependencies
+```
