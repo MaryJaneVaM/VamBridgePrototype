@@ -14,11 +14,14 @@ It explains the components, their responsibilities, and how they interact at run
 
 The system consists of three major components:
 
-```
-+-------------------+      +-------------------+      +-------------------+
-|    VaM Plugin     | <--->|      Server       |<---->|     Browser       |
-|   (TCP Client)    |  TCP |   (Bridge Hub)    |  WS  | (WebSocket Client)|
-+-------------------+      +-------------------+      +-------------------+
+```mermaid
+flowchart LR
+    V[VaM Plugin<br/>(TCP Client)] <--> S[Server<br/>(Bridge Hub)]
+    S <----> B[Browser<br/>(WebSocket Client)]
+
+    %% Labels for connections
+    V ---|TCP| S
+    S ---|WS| B
 ```
 
 ### 1.1 VaM Plugin (TCP Client)
@@ -187,7 +190,7 @@ if message from browser:
 
 ---
 
-# 8. Full Architecture Diagram (ASCII)
+# 8. Full Architecture Diagram
 
 ```mermaid
 sequenceDiagram
