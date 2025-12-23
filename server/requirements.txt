@@ -1,0 +1,5 @@
+# Networking
+websockets==12.0
+
+# Core utilities
+# (standard library modules like asyncio, socket, json are built-in)
