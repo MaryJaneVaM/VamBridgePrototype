@@ -1,0 +1,145 @@
+{
+  "meta": {
+    // Which worker produced this output: "pose", "hands", or "holistic"
+    "source": "string",
+
+    // Short model identifier (kept for debugging and future-proofing)
+    "model": "string",
+
+    "image": {
+      // Width and height of the resized image used for detection
+      "width": "number",
+      "height": "number",
+
+      // width / height of the resized image
+      "aspect_ratio": "number"
+    },
+
+    // Ratio between resized image and original input image
+    "resize_scale": "number",
+
+    // Whether the frame is considered usable (based on completeness/visibility)
+    "frame_valid": "boolean"
+  },
+
+  "pose": {
+    "landmarks": [
+      {
+        // Landmark index (0–32 for pose)
+        "id": "number",
+
+        // Human-readable name (e.g., LEFT_SHOULDER)
+        "name": "string",
+
+        // Normalized coordinates in full-image space (0–1)
+        "x_norm": "number",
+        "y_norm": "number",
+
+        // Pixel coordinates in the resized image
+        "x_px": "number",
+        "y_px": "number",
+
+        // MediaPipe relative depth (not real-world depth)
+        "z": "number",
+
+        // Visibility / confidence score from MediaPipe
+        "confidence": "number"
+      }
+    ],
+
+    // Boolean list indicating which pose landmarks are considered visible
+    "visibility_mask": [
+      true,
+      true,
+      false
+      // ... one entry per landmark
+    ],
+
+    // Ratio of visible major joints (0–1)
+    "completeness": "number",
+
+    // Bounding box of the detected person in normalized coordinates
+    "bbox": {
+      "x1": "number",
+      "y1": "number",
+      "x2": "number",
+      "y2": "number",
+      "width_norm": "number",
+      "height_norm": "number"
+    },
+
+    // Crop used for pose refinement (null if no refinement was used)
+    "crop": {
+      "x1": "number",
+      "y1": "number",
+      "x2": "number",
+      "y2": "number",
+      "width": "number",
+      "height": "number",
+      "upscaled_to": ["number", "number"]
+    }
+  },
+
+  // LEFT HAND (null if not detected)
+  "hand_left": {
+    // Confidence that this is the left hand (only provided by Hand Worker)
+    "handedness_confidence": "number",
+
+    "landmarks": [
+      {
+        "id": "number",
+        "name": "string",
+        "x_norm": "number",
+        "y_norm": "number",
+        "x_px": "number",
+        "y_px": "number",
+        "z": "number",
+        "confidence": "number"
+      }
+    ],
+
+    // Ratio of visible hand joints (0–1)
+    "completeness": "number",
+
+    // Crop used for this specific hand (each hand has its own crop)
+    "crop": {
+      "x1": "number",
+      "y1": "number",
+      "x2": "number",
+      "y2": "number",
+      "width": "number",
+      "height": "number",
+      "upscaled_to": ["number", "number"]
+    }
+  },
+
+  // RIGHT HAND (null if not detected)
+  "hand_right": {
+    "handedness_confidence": "number",
+
+    "landmarks": [
+      {
+        "id": "number",
+        "name": "string",
+        "x_norm": "number",
+        "y_norm": "number",
+        "x_px": "number",
+        "y_px": "number",
+        "z": "number",
+        "confidence": "number"
+      }
+    ],
+
+    "completeness": "number",
+
+    "crop": {
+      "x1": "number",
+      "y1": "number",
+      "x2": "number",
+      "y2": "number",
+      "width": "number",
+      "height": "number",
+      "upscaled_to": ["number", "number"]
+    }
+  }
+}
