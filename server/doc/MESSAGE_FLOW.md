@@ -14,16 +14,16 @@ It summarizes the runtime behavior of the server and the routing logic between T
 
 ```mermaid
 flowchart LR
-    V["VaM Plugin\n(TCP)"]
-    S["Server\n(Bridge)"]
-    B["Browser\n(WebSocket)"]
+    V["VaM Plugin (TCP)"]
+    S["Server (Bridge)"]
+    B["Browser (WebSocket)"]
 
     V <--> S
     S <--> B
 
-    %% Connection labels
-    V ---|Raw TCP\n(framed JSON)| S
-    S ---|Async WS\n(JSON messages)| B
+    %% Add notes instead of edge labels
+    V -. Raw TCP (framed JSON) .-> S
+    S -. Async WS JSON messages .-> B
 ```
 
 The server acts as a **bridge**:
