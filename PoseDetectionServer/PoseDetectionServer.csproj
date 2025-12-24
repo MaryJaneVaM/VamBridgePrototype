@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+    <NoWarn>2008</NoWarn>
+  </PropertyGroup>
+
+  <!-- Disable C# compilation (Python-only project) -->
+  <ItemGroup>
+    <Compile Remove="**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="**\*.py" />
+    <None Include="requirements.txt" />
+  </ItemGroup>
+
+  <!-- Python environment setup (only runs if venv does NOT exist) -->
+  <Target Name="SetupPython" AfterTargets="Build">
+    <Message Text="Setting up Python environment for PoseDetectionServer..." Importance="high" />
+
+    <!-- Create venv only if missing -->
+    <Exec Condition="!Exists('venv/Scripts/python.exe')" Command="python -m venv venv" />
+
+    <!-- Install dependencies only if venv was just created -->
+    <Exec Condition="!Exists('venv/Scripts/python.exe')" Command="venv\Scripts\pip install -r requirements.txt" />
+  </Target>
+
+  <!-- Download Mediapipe models (only if missing) -->
+  <Target Name="DownloadModels" AfterTargets="SetupPython">
+    <Message Text="Downloading Mediapipe models..." Importance="high" />
+
+    <!-- Ensure models directory exists -->
+    <MakeDir Directories="models" />
+
+    <!-- Pose model -->
+    <Exec Condition="!Exists('models/pose_landmarker_heavy.task')" Command="powershell -Command &quot;Invoke-WebRequest 'https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/latest/pose_landmarker_heavy.task' -OutFile 'models/pose_landmarker_heavy.task'&quot;" />
+
+    <!-- Hand model -->
+    <Exec Condition="!Exists('models/hand_landmarker.task')" Command="powershell -Command &quot;Invoke-WebRequest 'https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task' -OutFile 'models/hand_landmarker.task'&quot;" />
+  </Target>
+
+</Project>
