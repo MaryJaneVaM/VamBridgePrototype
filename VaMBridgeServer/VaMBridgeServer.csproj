@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <DisableImplicitNamespaceImports>true</DisableImplicitNamespaceImports>
+    <NoWarn>2008</NoWarn>
+  </PropertyGroup>
+
+  <!-- Disable C# compilation (Python-only project) -->
+  <ItemGroup>
+    <Compile Remove="**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="**\*.py" />
+    <None Include="requirements.txt" />
+  </ItemGroup>
+
+  <!-- Python environment setup (only runs if venv does NOT exist) -->
+  <Target Name="SetupPython" AfterTargets="Build">
+    <Message Text="Setting up Python environment for VaMBridgeServer..." Importance="high" />
+
+    <!-- Create venv only if missing -->
+    <Exec Condition="!Exists('venv/Scripts/python.exe')" Command="python -m venv venv" />
+
+    <!-- Install dependencies only if venv was just created -->
+    <Exec Condition="!Exists('venv/Scripts/python.exe')" Command="venv\Scripts\pip install -r requirements.txt" />
+  </Target>
+
+</Project>
