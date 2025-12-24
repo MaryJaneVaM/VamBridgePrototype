@@ -94,9 +94,8 @@
   "data": [
     {
       "id": "control",
-      "position": { "x": "0", "y": "0", "z": "0" },
-      "rotation": { "x": "", "y": "", "z": "", "w": "" },
-      "rotationEuler": { "x": "0", "y": "0", "z": "0" }
+      "position": { "x": "0", "y": "1", "z": "0" }
+      "rotationEuler": { "x": "0", "y": "45", "z": "0" }
     }
   ]
 }`;
