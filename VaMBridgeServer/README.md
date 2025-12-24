@@ -38,39 +38,6 @@ websockets==12.0
 
 ---
 
-## Installation
-
-```
-1. Create and activate a virtual environment
-   python -m venv venv
-   & venv\Scripts\Activate.ps1       # Windows PowerShell
-
-2. Upgrade pip (recommended)
-   python -m pip install --upgrade pip
-
-3. Install dependencies
-   pip install -r requirements.txt
-```
-
----
-
-## Usage
-
-Start the server:
-
-```
-python app.py
-```
-
-The server will:
-
-- Accept TCP connections from VaM plugins  
-- Accept WebSocket connections from browsers  
-- Forward browser commands to the matching plugin  
-- Broadcast plugin messages to all browsers  
-
----
-
 ## Handling Base64 Images
 
 The server does not decode or transform images.  
@@ -84,7 +51,7 @@ TCP → Browser message
 }
 ```
 
-Browser rendering:
+Browser rendering example:
 
 ```
 <img src="data:image/png;base64,{{base64_string}}" />
@@ -103,3 +70,6 @@ server/
 ├── core.py           # Shared routing + message handling logic
 └── requirements.txt  # Dependencies
 ```
+
+---
+
