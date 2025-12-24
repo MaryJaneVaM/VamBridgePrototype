@@ -10,14 +10,20 @@ The build process prepares everything needed for the plugin to run inside Virt�
 Before building, make sure the following are installed:
 
 ### ✔ .NET SDK (8.0 or newer)
-Used only to run the MSBuild automation tasks.
+Used only to run the MSBuild automation tasks.  
+Download:  
+https://dotnet.microsoft.com/en-us/download
 
 ### ✔ .NET Framework 3.5 Developer Pack
-Required because the project targets `net35`.
+Required because the project targets `net35`.  
+Download:  
+https://dotnet.microsoft.com/en-us/download/dotnet-framework/net35-sp1
 
 ### ✔ Python 3.10
 Required for the Python server components.  
-Other versions are not supported by Mediapipe.
+Other versions are not supported by Mediapipe.  
+Download:  
+https://www.python.org/downloads/release/python-3100/
 
 Check your Python version:
 
