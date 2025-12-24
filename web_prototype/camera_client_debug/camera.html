@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>VaM Bridge – Camera Debug Client</title>
+  <link rel="stylesheet"
+    href="camera.css">
+</head>
+
+<body>
+  <h1>VaM Bridge – Camera Debug Client</h1>
+
+  <div class="camera-inputs">
+    <button onclick="sendCameraCommand('read_view')">Read View</button>
+    <button onclick="sendCameraCommand('screenshot')">Screenshot</button>
+  </div>
+
+  <h2>Set Camera View</h2>
+  <div class="camera-inputs">
+    <label>PosX: <input id="camPosX"
+        type="number"
+        step="0.01"
+        value="0"></label>
+    <label>PosY: <input id="camPosY"
+        type="number"
+        step="0.01"
+        value="0"></label>
+    <label>PosZ: <input id="camPosZ"
+        type="number"
+        step="0.01"
+        value="0"></label>
+
+    <label>RotX: <input id="camRotX"
+        type="number"
+        step="0.01"
+        value="0"></label>
+    <label>RotY: <input id="camRotY"
+        type="number"
+        step="0.01"
+        value="0"></label>
+    <label>RotZ: <input id="camRotZ"
+        type="number"
+        step="0.01"
+        value="0"></label>
+
+    <button onclick="setCameraView()">Send View</button>
+  </div>
+
+  <div class="camera-inputs">
+    <button onclick="setFrontView()">Front</button>
+    <button onclick="setRightSideView()">Right</button>
+    <button onclick="setLeftSideView()">Left</button>
+    <button onclick="setBackView()">Back</button>
+  </div>
+
+  <div class="output-section">
+    <div class="output-pane">
+      <h2>Camera Image</h2>
+      <div id="cameraImageContainer">
+        <img id="cameraImage"
+          alt="No image yet">
+      </div>
+    </div>
+
+    <div class="output-pane">
+      <h2>Responses</h2>
+      <div id="responseBoxCamera">No response yet...</div>
+    </div>
+  </div>
+
+  <script src="camera.js"></script>
+</body>
+
+</html>
