@@ -1,1 +1,109 @@
-...
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+
+h1,
+h2 {
+  color: #333;
+  margin: 10px 0;
+}
+
+button {
+  margin: 5px 0;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.output-section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 20px;
+  min-height: 0;
+}
+
+.output-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.full-width-buttons {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  justify-content: center;
+}
+
+.full-width-buttons button {
+  flex: 1;
+}
+
+#poseImageContainer {
+  flex: 1;
+  width: 100%;
+  border: 1px solid #999;
+  background: #f9f9f9;
+  border-radius: 6px;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#poseImage {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+#poseCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+#responseBoxPose {
+  width: 100%;
+  flex: 1;
+  padding: 10px;
+  font-family: monospace;
+  border: 1px solid #999;
+  background: #f9f9f9;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  overflow-x: auto;
+  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+.response-header {
+  position: relative;
+  height: 0;
+}
+
+#btnCopyResponse {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
