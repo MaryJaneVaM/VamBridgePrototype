@@ -60,9 +60,9 @@ async function sendToEndpoint(type) {
   }
 
   const endpoint = {
-    holistic: "http://localhost:5005/detect/holistic",
-    pose: "http://localhost:5005/detect/pose",
-    hands: "http://localhost:5005/detect/hands"
+    holistic: "http://localhost:5100/detect/holistic",
+    pose: "http://localhost:5100/detect/pose",
+    hands: "http://localhost:5100/detect/hands"
   }[type];
 
   responseBox.textContent = `Sending image to ${type} endpoint...`;
