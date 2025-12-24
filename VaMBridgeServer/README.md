@@ -62,13 +62,23 @@ Browser rendering example:
 ## Project Structure
 
 ```
-server/
-├── app.py            # Entrypoint: starts TCP + WebSocket hub
-├── ws_hub.py         # WebSocket broadcast hub
-├── ws_helpers.py     # WebSocket utility helpers
-├── tcp_helpers.py    # TCP receive/send helpers for VaM plugins
-├── core.py           # Shared routing + message handling logic
-└── requirements.txt  # Dependencies
+VaMBridgeServer/
+  app.py
+  core.py
+  README.md
+  requirements.txt
+  VaMBridgeServer.csproj
+
+  doc/
+    ARCHITECTURE_OVERVIEW.md
+    COMMUNICATION_PROTOCOL.md
+    MESSAGE_FLOW.md
+    TCP_PROTOCOL.md
+    WS_PROTOCOL.md
+
+  tcp_helpers.py
+  ws_helpers.py
+  ws_hub.py
 ```
 
 ---
