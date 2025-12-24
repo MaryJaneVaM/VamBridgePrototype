@@ -1,1 +1,49 @@
-...
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>VaM Bridge – Pose Debug Client</title>
+  <link rel="stylesheet"
+    href="pose.css">
+</head>
+
+<body>
+  <h1>VaM Bridge – Pose Debug Client</h1>
+
+  <div class="output-section">
+
+    <div class="output-pane">
+      <h2>Image</h2>
+
+      <div id="poseImageContainer">
+        <img id="poseImage"
+          alt="No image loaded">
+        <canvas id="poseCanvas"></canvas>
+      </div>
+
+      <div class="full-width-buttons">
+        <button id="btnOpenImage">Open Image</button>
+        <button id="btnHolistics">Mediapipe Holistics</button>
+        <button id="btnPose">Mediapipe Pose</button>
+        <button id="btnHands">Mediapipe Hands</button>
+      </div>
+
+      <div class="output-pane">
+        <h2>Responses</h2>
+
+        <div class="response-header">
+          <button id="btnCopyResponse">Copy</button>
+        </div>
+
+        <div id="responseBoxPose">No response yet...</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="pose.js"></script>
+</body>
+
+</html>
