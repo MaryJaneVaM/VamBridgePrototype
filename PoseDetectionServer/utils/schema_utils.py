@@ -8,7 +8,7 @@
 # you give appropriate credit and distribute your contributions under the same
 # license. Full license: https://creativecommons.org/licenses/by-nc-sa/4.0/
 #
-# Path: pose_server/utils/schema_utils.py
+# Path: PoseDetectionServer/utils/schema_utils.py
 # -----------------------------------------------------------------------------
 
 """
