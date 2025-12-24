@@ -26,7 +26,7 @@ using SimpleJSON;
 public class VaMBridgeCamera : MVRScript
 {
   private const string HOST = "127.0.0.1";
-  private const int PORT = 5000;
+  private const int PORT = 5101;
 
   private Socket _client;
   private IAsyncResult _connectResult;
