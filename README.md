@@ -9,17 +9,17 @@ The build process prepares everything needed for the plugin to run inside Virt�
 
 Before building, make sure the following are installed:
 
-### ✔ .NET SDK (8.0 or newer)
+### .NET SDK (8.0 or newer)
 Used only to run the MSBuild automation tasks.  
 Download:  
 https://dotnet.microsoft.com/en-us/download
 
-### ✔ .NET Framework 3.5 Developer Pack
+### .NET Framework 3.5 Developer Pack
 Required because the project targets `net35`.  
 Download:  
 https://dotnet.microsoft.com/en-us/download/dotnet-framework/net35-sp1
 
-### ✔ Python 3.10
+### Python 3.10
 Required for the Python server components.  
 Other versions are not supported by Mediapipe.  
 Download:  
@@ -33,7 +33,7 @@ python --version
 
 ---
 
-## 2. Clone the Repository
+## 2. Clone the repository
 
 ```powershell
 git clone https://github.com/MaryJaneVaM/VamBridgePrototype.git
@@ -42,29 +42,27 @@ cd VamBridgePrototype
 
 ---
 
-## 3. Set the VaM Path
+## 3. Set the VaM path
 
 The build system needs to know where your VaM installation is located.
 
 ```powershell
-$env:VAM_PATH = "C:\Path\To\VaM"
+$env:VAM_PATH = "C:PathToVaM"
 ```
 
 To make this permanent:
 
 ```powershell
-setx VAM_PATH "C:\Path\To\VaM"
+setx VAM_PATH "C:PathToVaM"
 ```
 
 The build will place the plugin files into:
 
-```
-<VaM>\Custom\Scripts\MaryJane\VaMBridgePrototype\
-```
+`<VaM>CustomScriptsMaryJaneVaMBridgePrototype`
 
 ---
 
-## 4. Build the Project
+## 4. Build the project
 
 From the repository root:
 
@@ -74,15 +72,15 @@ dotnet build
 
 During the build:
 
-### ✔ C# source files  
+### C# source files  
 All `.cs` and `.cslist` files are copied into your VaM plugin folder.  
 VaM loads these scripts directly.
 
-### ✔ Python servers  
+### Python servers  
 Each Python server project automatically:
 
 - creates a virtual environment (only if missing)
-- installs dependencies from `requirements.txt` (only if needed)
+- installs dependencies from `requirements.txt`
 - downloads Mediapipe models (only if missing)
 
 No manual setup is required.
@@ -92,6 +90,7 @@ No manual setup is required.
 ## 5. Troubleshooting
 
 ### VaM path not set
+
 If the build stops with an error, verify:
 
 ```powershell
@@ -99,14 +98,16 @@ echo $env:VAM_PATH
 ```
 
 ### Python issues
+
 If dependencies fail to install, ensure you are using **Python 3.10**.
 
 ### Resetting a Python environment
+
 To force a clean reinstall:
 
 ```powershell
-Remove-Item -Recurse -Force PoseDetectionServer\venv
-Remove-Item -Recurse -Force VaMBridgeServer\venv
+Remove-Item -Recurse -Force PoseDetectionServervenv
+Remove-Item -Recurse -Force VaMBridgeServervenv
 dotnet build
 ```
 
@@ -118,57 +119,148 @@ After building the project, each server has its own virtual environment and can 
 
 ---
 
-### ✔ Start the Pose Detection Server
+### Start the Pose Detection Server
 
 ```powershell
 cd PoseDetectionServer
-& venv\Scripts\Activate.ps1
+& venvScriptsActivate.ps1
 python app.py
 ```
 
 The server runs on:
 
-```
-http://127.0.0.1:5100
-```
+`http://127.0.0.1:5100`
 
 ---
 
-### ✔ Start the VaM Bridge Server (TCP ↔ WebSocket)
+### Start the VaM Bridge Server (TCP ↔ WebSocket)
 
 ```powershell
 cd VaMBridgeServer
-& venv\Scripts\Activate.ps1
+& venvScriptsActivate.ps1
 python app.py
 ```
 
 By default it listens on:
 
-- **TCP:** `127.0.0.1:5101`  
-- **WebSocket:** `ws://127.0.0.1:5102`
+- TCP: `127.0.0.1:5101`  
+- WebSocket: `ws://127.0.0.1:5102`
 
 ---
 
-### ✔ Running both servers at once
+### Running both servers at once
 
-Open **two PowerShell windows**.
+Open two PowerShell windows.
 
-**Window 1: Pose Detection Server**
+Window 1: Pose Detection Server
 
 ```powershell
 cd PoseDetectionServer
-& venv\Scripts\Activate.ps1
+& venvScriptsActivate.ps1
 python app.py
 ```
 
-**Window 2: VaM Bridge Server**
+Window 2: VaM Bridge Server
 
 ```powershell
 cd VaMBridgeServer
-& venv\Scripts\Activate.ps1
+& venvScriptsActivate.ps1
 python app.py
 ```
 
 ---
 
-Enjoy building and extending VaM Bridge!
+## 7. Using VaM Bridge inside Virt‑A‑Mate
+
+Once both servers are running, you can load the VaM Bridge plugins inside Virt‑A‑Mate and interact with the web clients.
+
+### Launch Virt‑A‑Mate
+
+1. Start VaM.exe  
+2. Load the Creator Default scene (recommended)
+
+---
+
+### Load the Camera plugin
+
+1. Select the WindowCamera atom  
+2. Open the Control tab  
+3. Go to Plugins  
+4. Click Add Plugin → Select File  
+5. Navigate to:  
+   `MaryJane → VaMBridgePrototype → VaMBridgeCamera → VaMBridgeCamera.cslist`
+
+---
+
+### Load the Person plugin
+
+1. Select the Person atom  
+2. Open the Plugins tab  
+3. Click Add Plugin → Select File  
+4. Navigate to:  
+   `MaryJane → VaMBridgePrototype → VaMBridgePerson → VaMBridgePerson.cslist`
+
+Important:  
+The Person atom must be named exactly:
+
+`Person`
+
+The plugin will not function if the atom name is changed.
+
+---
+
+## 8. Web clients
+
+You can open all debug clients in any modern browser.
+
+### Camera debug client
+
+Open:
+
+`VaMBridgeWebClient/camera_debug_client/camera.html`
+
+Example workflow:
+
+- Select a camera preset (e.g., Front)  
+- Send View  
+- Screenshot  
+- Read View  
+
+---
+
+### Person debug client
+
+Open:
+
+`VaMBridgeWebClient/person_debug_client/person.html`
+
+Notes:
+
+- Only favorite morphs are listed  
+- The JSON payload is editable  
+
+---
+
+### Pose debug client
+
+Open:
+
+`VaMBridgeWebClient/pose_debug_client/pose.html`
+
+Workflow:
+
+- Load any image  
+- Press any Mediapipe button (Pose, Hands, Holistic)  
+- View results and overlays  
+
+---
+
+## 9. Recommended setup
+
+VaM Bridge works best with:
+
+- Dual‑monitor setups (VaM Desktop on one screen, web clients on the other) 
+
+---
+
+## Enjoy building and extending VaM Bridge!
