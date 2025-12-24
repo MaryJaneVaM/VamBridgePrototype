@@ -111,4 +111,63 @@ dotnet build
 
 ---
 
+## 6. Starting the servers (PowerShell)
+
+After building the project, each server has its own virtual environment and can be started manually.
+
+---
+
+### ✔ Start the Pose Detection Server
+
+```powershell
+cd PoseDetectionServer
+& venv\Scripts\Activate.ps1
+python app.py
+```
+
+The server runs on:
+
+```
+http://127.0.0.1:5100
+```
+
+---
+
+### ✔ Start the VaM Bridge Server (TCP ↔ WebSocket)
+
+```powershell
+cd VaMBridgeServer
+& venv\Scripts\Activate.ps1
+python app.py
+```
+
+By default it listens on:
+
+- **TCP:** `127.0.0.1:5101`  
+- **WebSocket:** `ws://127.0.0.1:5102`
+
+---
+
+### ✔ Running both servers at once
+
+Open **two PowerShell windows**.
+
+**Window 1: Pose Detection Server**
+
+```powershell
+cd PoseDetectionServer
+& venv\Scripts\Activate.ps1
+python app.py
+```
+
+**Window 2: VaM Bridge Server**
+
+```powershell
+cd VaMBridgeServer
+& venv\Scripts\Activate.ps1
+python app.py
+```
+
+---
+
 Enjoy building and extending VaM Bridge!
