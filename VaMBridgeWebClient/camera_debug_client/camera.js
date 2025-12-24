@@ -13,7 +13,7 @@
   }
 
   function connect() {
-    wsCamera = new WebSocket("ws://127.0.0.1:8765");
+    wsCamera = new WebSocket("ws://127.0.0.1:5102");
 
     wsCamera.onopen = () => {
       logResponse("[WS] Connected");
