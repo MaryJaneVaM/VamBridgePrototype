@@ -9,7 +9,7 @@
 # you give appropriate credit and distribute your contributions under the same
 # license. Full license: https://creativecommons.org/licenses/by-nc-sa/4.0/
 #
-# Path: server/tcp_helpers.py
+# Path: VaMBridgeServer/tcp_helpers.py
 # -----------------------------------------------------------------------------
 
 """
