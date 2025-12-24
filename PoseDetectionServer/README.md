@@ -231,15 +231,37 @@ Example response:
 ## Project structure
 
 ```
-pose_server/
+PoseDetectionServer/
   app.py
-  routes/
-  workers/
-  utils/
-  models/
+  PoseDetectionServer.csproj
+  README.md
   requirements.txt
-  LICENSE
-  NOTICE
+
+  doc/
+    UNIFIED_OUTPUT_SCHEMA.jsonc
+
+  models/
+    hand_landmarker.task
+    pose_landmarker_heavy.task
+
+  routes/
+    hand_route.py
+    holistic_route.py
+    pose_route.py
+
+  utils/
+    bbox_utils.py
+    crop_utils.py
+    image_utils.py
+    landmark_utils.py
+    model_utils.py
+    schema_utils.py
+
+  workers/
+    base_worker.py
+    hand_worker.py
+    holistic_worker.py
+    pose_worker.py
 ```
 
 ---
