@@ -264,3 +264,19 @@ VaM Bridge works best with:
 ---
 
 ## Enjoy building and extending VaM Bridge!
+
+## 10. Disclaimer
+
+VaM Bridge and its companion servers are intended to run **exclusively on localhost**.  
+They are not designed, tested, or secured for remote access, public networks, or internet‑facing deployment.
+
+By using this software, you acknowledge and agree to the following:
+
+- All components must be run locally on your own machine.
+- You are solely responsible for how you use, configure, or modify the software.
+- The author(s) provide this project “as is” without any warranties of any kind.
+- No liability is accepted for data loss, system damage, security issues, or any other harm resulting from the use or misuse of this software.
+- Use this project at your own risk.
+
+If you do not agree with these terms, do not use the software.
+
