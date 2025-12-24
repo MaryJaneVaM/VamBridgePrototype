@@ -105,7 +105,7 @@ If dependencies fail to install, ensure you are using **Python 3.10**.
 To force a clean reinstall:
 
 ```powershell
-rmdir /s /q venv
+Remove-Item -Recurse -Force venv
 dotnet build
 ```
 
