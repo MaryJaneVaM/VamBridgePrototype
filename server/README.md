@@ -43,8 +43,7 @@ websockets==12.0
 ```
 1. Create and activate a virtual environment
    python -m venv venv
-   source venv/bin/activate        # Linux/macOS
-   venv\Scripts\Activate.ps1       # Windows PowerShell
+   & venv\Scripts\Activate.ps1       # Windows PowerShell
 
 2. Upgrade pip (recommended)
    python -m pip install --upgrade pip
