@@ -123,7 +123,7 @@ After building the project, each server has its own virtual environment and can 
 
 ```powershell
 cd PoseDetectionServer
-& venvScriptsActivate.ps1
+& venv\ScriptsActivate.ps1
 python app.py
 ```
 
@@ -137,7 +137,7 @@ The server runs on:
 
 ```powershell
 cd VaMBridgeServer
-& venvScriptsActivate.ps1
+& venv\ScriptsActivate.ps1
 python app.py
 ```
 
