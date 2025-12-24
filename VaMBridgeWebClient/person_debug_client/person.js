@@ -13,7 +13,7 @@
   }
 
   function connect() {
-    wsPerson = new WebSocket("ws://127.0.0.1:8765");
+    wsPerson = new WebSocket("ws://127.0.0.1:5102");
 
     wsPerson.onopen = () => {
       logResponse("[WS] Connected");
