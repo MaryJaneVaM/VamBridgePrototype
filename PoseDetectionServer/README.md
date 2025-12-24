@@ -20,9 +20,9 @@ The service is fully standalone so the main VaM server remains untouched.
   - `/detect/hands` — hands only (Tasks API v2)
 - Accepts raw PNG/JPEG image bytes  
 - Internal downscaling using `smart_resize()`  
-- **Automatic crop‑based refinement** (whenever a valid bounding box is available)  
+- **Automatic crop‑based refinement**  
 - Unified JSON schema with normalized and pixel coordinates  
-- Uses MediaPipe `0.10.21` (Tasks API + legacy API)  
+- Uses MediaPipe `0.10.21`  
 - Lightweight Flask server  
 - Easy to extend with new MediaPipe models  
 
@@ -49,117 +49,56 @@ https://developers.google.com/mediapipe/solutions/models
 
 ## Requirements
 
-Python 3.10+ is supported and tested with:
+The server uses:
 
 ```
 mediapipe==0.10.21
-```
-
-Core dependencies:
-
-```
 flask
 flask-cors
-mediapipe==0.10.21
 opencv-python
 numpy
 ```
 
----
+Model files required:
 
-## Model files (required)
+- `pose_landmarker_heavy.task`
+- `pose_landmarker_full.task` (optional)
+- `hand_landmarker.task`
 
-Download the following `.task` models:
-
-Pose Landmarker (Tasks API):  
-- Heavy model:  
-  https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/latest/pose_landmarker_heavy.task  
-- Full model (optional alternative):  
-  https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_full/float16/latest/pose_landmarker_full.task  
-
-Hand Landmarker (Tasks API):  
-- Hand model:  
-  https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task  
-
-Place all downloaded models inside:
-
-```
-pose_server/models/
-```
+These are automatically handled by the build system.
 
 ---
 
-## Installation
-
-### 1. Create and activate a Python virtual environment
-
-Windows (PowerShell):
+## Endpoints
 
 ```
-py -3.10 -m venv venv
-& venv\Scripts\Activate.ps1
+/detect/holistic
+/detect/pose
+/detect/hands
 ```
 
-### 2. Upgrade pip
-
-```
-python -m pip install --upgrade pip
-```
-
-### 3. Install dependencies
-
-```
-pip install -r requirements.txt
-```
-
-### 4. (Optional) Freeze exact versions
-
-```
-pip freeze > requirements.txt
-```
-
----
-
-## Usage
-
-Start the server:
-
-```
-python app.py
-```
-
-Endpoints:
-
-```
-http://localhost:5005/detect/holistic
-http://localhost:5005/detect/pose
-http://localhost:5005/detect/hands
-```
+All endpoints accept raw image bytes (PNG/JPEG) and return a unified JSON structure.
 
 ---
 
 ## How detection works (high level)
 
-For pose and hands, the pipeline is:
-
-1. Decode image bytes and smart‑resize.  
-2. Run **full‑frame** detection (pose / holistic / hands).  
-3. Compute a **bounding box** (pose body bbox or hand bbox from wrist).  
-4. If the bbox is valid:
-   - Extract crop  
-   - Upscale crop (e.g. to 512×512)  
-   - Run a **second detection pass** on the crop  
-   - Restore refined landmarks to **full‑image normalized coordinates**  
-5. If refinement is not possible, fall back to the full‑frame detection.  
-6. Return results in a **unified JSON schema**.
-
-Crop‑based refinement is automatic whenever possible.
+1. Decode image bytes and smart‑resize  
+2. Run full‑frame detection  
+3. Compute bounding box  
+4. If valid:  
+   - crop  
+   - upscale  
+   - run second detection pass  
+   - restore coordinates  
+5. Otherwise: use full‑frame result  
+6. Return unified JSON schema  
 
 ---
 
 ## Unified response schema
 
-All endpoints return the same top‑level structure:
+All endpoints return:
 
 ```
 {
@@ -170,7 +109,7 @@ All endpoints return the same top‑level structure:
 }
 ```
 
-### `meta` block
+### `meta` block example
 
 ```
 {
@@ -186,7 +125,7 @@ All endpoints return the same top‑level structure:
 }
 ```
 
-### Pose block (`pose`)
+### Pose block example
 
 ```
 {
@@ -209,7 +148,7 @@ All endpoints return the same top‑level structure:
 }
 ```
 
-### Hand block (`hand_left`, `hand_right`)
+### Hand block example
 
 ```
 {
@@ -236,18 +175,10 @@ All endpoints return the same top‑level structure:
 
 ## Example requests and responses
 
-### 1. Holistic endpoint  
-POST `http://localhost:5005/detect/holistic`
-
-JavaScript example:
+### Holistic endpoint
 
 ```
-fetch("http://localhost:5005/detect/holistic", {
-    method: "POST",
-    body: resizedImageBlob
-})
-.then(r => r.json())
-.then(data => console.log("Holistic result:", data));
+POST /detect/holistic
 ```
 
 Example response (simplified):
@@ -261,23 +192,13 @@ Example response (simplified):
 }
 ```
 
----
-
-### 2. Pose Tasks API endpoint  
-POST `http://localhost:5005/detect/pose`
-
-JavaScript example:
+### Pose endpoint
 
 ```
-fetch("http://localhost:5005/detect/pose", {
-    method: "POST",
-    body: resizedImageBlob
-})
-.then(r => r.json())
-.then(data => console.log("Pose Tasks result:", data));
+POST /detect/pose
 ```
 
-Example response (simplified):
+Example response:
 
 ```
 {
@@ -288,23 +209,13 @@ Example response (simplified):
 }
 ```
 
----
-
-### 3. Hand Tasks API endpoint  
-POST `http://localhost:5005/detect/hands`
-
-JavaScript example:
+### Hands endpoint
 
 ```
-fetch("http://localhost:5005/detect/hands", {
-    method: "POST",
-    body: resizedImageBlob
-})
-.then(r => r.json())
-.then(data => console.log("Hand Tasks result:", data));
+POST /detect/hands
 ```
 
-Example response (simplified):
+Example response:
 
 ```
 {
@@ -323,25 +234,9 @@ Example response (simplified):
 pose_server/
   app.py
   routes/
-    holistic_route.py
-    pose_route.py
-    hand_route.py
   workers/
-    holistic_worker.py
-    pose_worker.py
-    hand_worker.py
   utils/
-    base_worker.py
-    bbox_utils.py
-    crop_utils.py
-    image_utils.py
-    landmark_utils.py
-    model_utils.py
-    schema_utils.py
   models/
-    pose_landmarker_heavy.task
-    pose_landmarker_full.task
-    hand_landmarker.task
   requirements.txt
   LICENSE
   NOTICE
@@ -351,29 +246,8 @@ pose_server/
 
 ## Notes
 
-- The server is stateless and lightweight.
-- The browser handles:
-  - receiving image blobs  
-  - sending full‑resolution images  
-  - drawing overlays (skeletons, hands)
+- The server is stateless and lightweight  
+- The browser handles image capture + overlay drawing  
+- The server handles detection + refinement  
 
-- The pose server handles:
-  - decoding image bytes  
-  - internal downscaling  
-  - automatic crop‑based refinement  
-  - running pose/hand detection  
-  - returning normalized and pixel keypoints  
-
-### Future extensions
-
-- Face detection  
-- Gesture recognition  
-- Iris tracking  
-- Body segmentation  
-- Face mesh  
-- Object detection  
-
-### API differences
-
-- **Tasks API** — modern, fast, actively supported  
-- **Holistic API** — legacy but still useful for combined body + hands
+---
