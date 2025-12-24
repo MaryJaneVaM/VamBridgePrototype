@@ -47,18 +47,18 @@ cd VamBridgePrototype
 The build system needs to know where your VaM installation is located.
 
 ```powershell
-$env:VAM_PATH = "C:PathToVaM"
+$env:VAM_PATH = "C:\PathTo\VaM"
 ```
 
 To make this permanent:
 
 ```powershell
-setx VAM_PATH "C:PathToVaM"
+setx VAM_PATH "C:\PathTo\VaM"
 ```
 
 The build will place the plugin files into:
 
-`<VaM>CustomScriptsMaryJaneVaMBridgePrototype`
+`<VaM>\Custom\Scripts\MaryJane\VaMBridgePrototype`
 
 ---
 
@@ -106,8 +106,8 @@ If dependencies fail to install, ensure you are using **Python 3.10**.
 To force a clean reinstall:
 
 ```powershell
-Remove-Item -Recurse -Force PoseDetectionServervenv
-Remove-Item -Recurse -Force VaMBridgeServervenv
+Remove-Item -Recurse -Force PoseDetectionServer\venv
+Remove-Item -Recurse -Force VaMBridgeServer\venv
 dotnet build
 ```
 
