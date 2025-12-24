@@ -8,7 +8,7 @@
 # you give appropriate credit and distribute your contributions under the same
 # license. Full license: https://creativecommons.org/licenses/by-nc-sa/4.0/
 #
-# Path: pose_server/workers/pose_worker.py
+# Path: pose_server/PoseDetectionServer/pose_worker.py
 # -----------------------------------------------------------------------------
 
 """
