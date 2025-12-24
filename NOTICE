@@ -1,13 +1,19 @@
-VaMBridgeCamera and VaMBridgePerson (Virt-a-Mate Bridge Plugins)
+NOTICE  
 Copyright (c) 2025 MaryJaneVaM
 
-These projects include original code authored by MaryJane and are licensed under
-the Creative Commons Attribution‑NonCommercial‑ShareAlike 4.0 International License
-(CC BY‑NC‑SA 4.0).
+This repository contains multiple components authored by MaryJaneVaM and licensed under the
+Creative Commons Attribution‑NonCommercial‑ShareAlike 4.0 International License (CC BY‑NC‑SA 4.0).
 
-Both plugins provide lightweight TCP communication utilities and JSON-based
-protocol handling for external control of Virt‑a‑Mate WindowCamera and Person
-atoms.
+This NOTICE file is provided for attribution and licensing transparency.
+
+----------------------------------------------------------------------
+VaMBridgeCamera and VaMBridgePerson (Virt‑a‑Mate Bridge Plugins)
+----------------------------------------------------------------------
+
+These projects include original code authored by MaryJaneVaM.
+
+They provide lightweight TCP communication utilities and JSON‑based protocol handling
+for external control of Virt‑a‑Mate WindowCamera and Person atoms.
 
 Third‑party components used in these projects include:
 
@@ -16,9 +22,43 @@ Third‑party components used in these projects include:
 - SimpleJSON (lightweight JSON parsing library)
 - .NET / Mono standard library components (System, System.Net.Sockets, etc.)
 
-These components are licensed under their respective open‑source or proprietary
-licenses. No modifications have been made to these third‑party libraries, and
-their licenses and copyright notices remain the property of their
-respective authors.
+These components are licensed under their respective open‑source or proprietary licenses.
+No modifications have been made to these third‑party libraries, and their licenses and
+copyright notices remain the property of their respective authors.
 
-This NOTICE file is provided for attribution and licensing transparency.
+----------------------------------------------------------------------
+Pose Detection Server
+----------------------------------------------------------------------
+
+This project includes original code authored by MaryJaneVaM.
+
+Third‑party components used in this project include:
+
+- MediaPipe (Google LLC)
+- OpenCV
+- NumPy
+- Flask
+- Additional open‑source libraries listed in requirements.txt
+
+These components are licensed under their respective open‑source licenses.
+No modifications have been made to these third‑party libraries, and their licenses and
+copyright notices remain the property of their respective authors.
+
+----------------------------------------------------------------------
+Virtamate Server Bridge (TCP ↔ WebSocket)
+----------------------------------------------------------------------
+
+This project includes original code authored by MaryJaneVaM.
+
+Third‑party components used in this project include:
+
+- websockets (Python WebSocket library)
+- Python standard library modules (asyncio, socket, json, etc.)
+
+These components are licensed under their respective open‑source licenses.
+No modifications have been made to these third‑party libraries, and their licenses and
+copyright notices remain the property of their respective authors.
+
+----------------------------------------------------------------------
+End of NOTICE
+----------------------------------------------------------------------
